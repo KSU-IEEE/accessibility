@@ -86,9 +86,9 @@ else:
 
 # then install python deps
 if python_list != '':
-    print("INstalling python dependencies")
+    print("Installing python dependencies")
     cmd = 'pip install ' + python_list 
 else:
-    print("Python list is empty, not installing python dependencies")  
+    print("Python list is empty, not installing python dependencies (none yet, ignore this message)")  
 
 print("List complete, exiting.......")
