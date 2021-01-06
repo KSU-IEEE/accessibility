@@ -1,4 +1,9 @@
 #!/usr/bin/env python3 
+
+##################################
+## TODO  
+## Add Rosserial installer
+##################################
 import os 
 import argparse
 
