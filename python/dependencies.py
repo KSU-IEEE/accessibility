@@ -33,16 +33,20 @@ def install_ros_melodic():
 ##################################
 ## apt dependencies
 ##################################
-def add_all_apt():
-    apt_list=''
-    apt_list = apt_list + add_ninja() + add_cmake()
+def add_all_apt(bool_add_rosserial):
+    apt_list = ''
+    apt_list = apt_list + add_ninja() + add_cmake() + add_rosserial(bool_add_rosserial)
     return apt_list
 
 def add_ninja():
     return 'ninja-build '
 
 def add_cmake():
-    return 'cmake '
+    return 'cmake '  
+
+def add_rosserial(add_this):
+    string = 'ros-melodic-rosserial-arduino ' if add_this else '' 
+    return string
 
 ##################################
 ## python dependencies
@@ -51,6 +55,7 @@ def add_all_python():
     # none yet
     python_list=''
     print("adding python deps")
+    return python_list
 
 ##################################
 ## main script
@@ -61,27 +66,35 @@ parser.add_argument('-a', '--all', help='Install all dependencies', action='stor
 parser.add_argument('-d', '--apt_deps', help='Install the apt-depends', action='store_true')
 parser.add_argument('-rm', '--ros_melodic', help='Install ros-melodic', action='store_true')
 parser.add_argument('-p', '--python_deps', help='Install the python dependencies (nothing yet)', action='store_true')
+parser.add_argument('--exclude_ros', help='Exclude ros install and rosserial apt install', action='store_true')
 
 args = parser.parse_args()  
 
+include_ros = not args.exclude_ros
+if(include_ros):
+    print("Including ros packages in install")
+else: 
+    print("Not including ros pacakges in install")
 apt_list=''
 python_list=''
 # based on flags, install ros or append lists
 if args.all:
-    install_ros_melodic()
-    apt_list = add_all_apt()
+    if include_ros:
+        install_ros_melodic()
+    apt_list = add_all_apt(include_ros)
     python_list = add_all_python() 
 else: 
     if args.apt_deps:
-        apt_list = add_all_apt()
-    if args.ros_melodic:
+        apt_list = add_all_apt(include_ros)
+    if args.ros_melodic and not include_ros:
         install_ros_melodic() 
     if args.python_deps:
         python = add_all_python()
 
 # first install apt  
 if apt_list != '':
-    print("Install apt-dependencies")
+    print("Install apt-dependencies: ")
+    print(apt_list)
     os.system('sudo apt-get update') 
     
     cmd='sudo apt-get install ' + apt_list 
