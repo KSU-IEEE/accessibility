@@ -35,7 +35,7 @@ def install_ros_melodic():
 ##################################
 def add_all_apt(bool_add_rosserial):
     apt_list = ''
-    apt_list = apt_list + add_ninja() + add_cmake() + add_rosserial(bool_add_rosserial)
+    apt_list = apt_list + add_ninja() + add_cmake() + add_rosserial(bool_add_rosserial) + add_arduino()
     return apt_list
 
 def add_ninja():
@@ -46,7 +46,10 @@ def add_cmake():
 
 def add_rosserial(add_this):
     string = 'ros-melodic-rosserial-arduino ' if add_this else '' 
-    return string
+    return string 
+
+def add_arduino():
+    return "arduino"
 
 ##################################
 ## python dependencies
