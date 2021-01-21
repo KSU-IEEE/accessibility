@@ -21,7 +21,6 @@ def install_ros_melodic():
 
     # installing ros 
     os.system('sudo apt install ros-melodic-ros-base')
-    os.system('sudo apt install ros-melodic-catkin-*')
     os.system('echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc')
     os.system('source ~/.bashrc')
 
@@ -34,13 +33,17 @@ def install_ros_melodic():
 ##################################
 ## apt dependencies
 ##################################
-def add_all_apt(bool_add_rosserial):
+def add_all_apt(bool_add_ros):
     apt_list = ''
-    apt_list = apt_list + add_ninja() + add_cmake() + add_rosserial(bool_add_rosserial) + add_arduino()
+    apt_list = apt_list + add_ninja() + add_cmake() + add_rosserial(bool_add_ros) + add_arduino() + add_catkin(bool_add_ros)
     return apt_list
 
 def add_ninja():
     return 'ninja-build '
+
+def add_catkin(add_this):
+    string = 'ros-melodic-catkin-* ' if add_this else ''
+    return string
 
 def add_cmake():
     return 'cmake '  
