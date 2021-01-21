@@ -21,6 +21,7 @@ def install_ros_melodic():
 
     # installing ros 
     os.system('sudo apt install ros-melodic-ros-base')
+    os.system('sudo apt install ros-melodic-catkin-*')
     os.system('echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc')
     os.system('source ~/.bashrc')
 
