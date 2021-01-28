@@ -20,13 +20,13 @@ def install_ros_melodic():
     os.system('sudo apt-get update')
 
     # installing ros 
-    os.system('sudo apt install ros-melodic-ros-base')
+    os.system('sudo apt-get install ros-melodic-ros-base')
     os.system('echo "source /opt/ros/melodic/setup.bash" >> ~/.bashrc')
     os.system('source ~/.bashrc')
 
     # initializing roscore 
-    os.system('sudo apt install python-rosdep python-rosinstall python-rosinstall-generator python-wstool build-essential')
-    os.system('sudo apt install python-rosdep')
+    os.system('sudo apt-get install python-rosdep python-rosinstall python-rosinstall-generator python-wstool build-essential')
+    os.system('sudo apt-get install python-rosdep')
     os.system('sudo rosdep init')
     os.system('rosdep update')
 
@@ -53,7 +53,7 @@ def add_rosserial(add_this):
     return string 
 
 def add_arduino():
-    return "arduino"
+    return 'arduino '
 
 ##################################
 ## python dependencies
