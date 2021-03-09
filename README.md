@@ -12,3 +12,15 @@ $ sudo chmod +x /usr/bin/<bash-script>.sh
 # move service into systemd
 sudo cp <myservice>.service /etc/systemd/system/<myservice>.service
 sudo chmod 644 /etc/systemd/system/<myservice>.service
+
+# enable service to be used at boot 
+sudo systemctl enable myservice
+
+```
+To test your service or stop and start it, you can use the commands:
+```BASH
+sudo systemctl status myservice
+sudo systemctl start myservcie
+sudo systemctl stop myservice
+sudo systemctl restart myservice
+```
